@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RM.Source", "RemoteManual\RM.Source.csproj", "{7D599826-4DDF-448B-AF41-D83A27E23470}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RM.Source", "RM.Source\RM.Source.csproj", "{7D599826-4DDF-448B-AF41-D83A27E23470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RM.UnitTesting", "Remote Manual\RM.UnitTesting.csproj", "{2DEFDD79-720D-4532-A9F7-A6AA0018955B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RM.UnitTesting", "RM.UnitTests\RM.UnitTesting.csproj", "{2DEFDD79-720D-4532-A9F7-A6AA0018955B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RM.TempConsole", "RM.TempConsole\RM.TempConsole.csproj", "{1FDF6A7D-EC61-48AD-9FDF-5DA5AB980019}"
 EndProject

@@ -1,18 +1,21 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using ZXing.Net.Mobile.Forms;
+using Android.Content.Res;
+using ZXing.Mobile;
 
 namespace QR_Scanner
 {
     [Activity(Label = "QR_Scanner", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
-
+        MobileBarcodeScanner.Initialize (Application);
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -23,8 +26,12 @@ namespace QR_Scanner
             // Get our button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
+            
+        }
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            global::ZXing.Net.Mobile.Forms.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
