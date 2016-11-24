@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RemoteManual;
 #pragma warning disable 618
+
+// for the test use the qr-code supplied with the program
 
 namespace RM.TempConsole
 {
@@ -14,43 +18,10 @@ namespace RM.TempConsole
     {
         static void Main()
         {
-            Program myProgram = new Program();
+            FileFinder myProgram = new FileFinder();
             myProgram.Run();
         }
 
-        private void Run()
-        {
-            Thread threadGetFile = new Thread(GetFile) {ApartmentState = ApartmentState.STA};
-            threadGetFile.Start();
-        }
-
-        void GetFile()
-        {
-            OpenFileDialog PathFinder = new OpenFileDialog();
-            PathFinder.Filter = "PDF Files|*.PDF";
-            PathFinder.FilterIndex = 1;
-
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            process.StartInfo = startInfo;
-
-            string PDFName;
-            
-
-            FolderBrowserDialog FolderLocation = new FolderBrowserDialog();
-
-            if (PathFinder.ShowDialog() == DialogResult.OK)
-            {
-                PDFName = PathFinder.FileName;
-                startInfo.FileName = PDFName;
-                process.Start();
-            }
-
-            
-
-
-
-        }
-
+       
     }
 }

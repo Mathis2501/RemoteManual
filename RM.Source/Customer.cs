@@ -8,5 +8,12 @@ namespace RemoteManual
 {
     public class Customer
     {
+        private string LastName;
+        private string FirstName;
+        private string UserName;
+        private string Password;
+
+
+
     }
 }
