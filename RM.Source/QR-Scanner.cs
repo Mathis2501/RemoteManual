@@ -7,6 +7,8 @@ using PQScan.BarcodeScanner;
 using System.Drawing;
 using System.Net;
 
+//Transfer to Desktop
+
 namespace RemoteManual
 {
     class QR_Scanner
