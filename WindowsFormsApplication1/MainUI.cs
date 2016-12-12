@@ -29,7 +29,11 @@ namespace WindowsFormsApplication1
             fl.Show();
         }
 
-        
-
+        private void btn_CreateUser_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            CreateUser cu = new CreateUser();
+            cu.Show();
+        }
     }
 }

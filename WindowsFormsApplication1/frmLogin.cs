@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,19 +36,34 @@ namespace WindowsFormsApplication1
             }
             try
             {
-                //Create SqlConnection
-                SqlConnection con = new SqlConnection(cs);
-                SqlCommand cmd = new SqlCommand("Select * from USER_DATABASE where UserName=@username and Password=@password", con);
-                cmd.Parameters.AddWithValue("@username", txt_UserName.Text);
-                cmd.Parameters.AddWithValue("@password", txt_Password.Text);
-                con.Open();
-                SqlDataAdapter adapt = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                adapt.Fill(ds);
-                con.Close();
-                int count = ds.Tables[0].Rows.Count;
-                //If count is equal to 1, than show frmMain form
-                if (count == 1)
+                bool AccessAllowed = false;
+                using (SqlConnection connection = new SqlConnection(cs))
+                {
+                    connection.Open();
+                    SqlCommand cmdpass = new SqlCommand("s",connection);
+                    cmdpass.CommandText = "SELECT Password FROM USER_DATABASE WHERE UserName LIKE '" + txt_UserName.Text + "'";
+                    string savedHashedPass = (string) cmdpass.ExecuteScalar();
+
+                    byte[] hashBytes = Convert.FromBase64String(savedHashedPass);
+                    byte[] salt = new byte[16];
+                    Array.Copy(hashBytes, 0, salt, 0, 16);
+                    string password;
+                    var pbkdf2 = new Rfc2898DeriveBytes(txt_Password.Text, salt, 10000);
+                    byte[] hash = pbkdf2.GetBytes(20);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        if (hashBytes[i+16] != hash[i])
+                        {
+                            throw new UnauthorizedAccessException();
+                        }
+                        else
+                        {
+                            AccessAllowed = true;
+                        }
+                    }
+                }
+                
+                if (AccessAllowed)
                 {
                     MessageBox.Show("Login Successful!");
                     this.Hide();
