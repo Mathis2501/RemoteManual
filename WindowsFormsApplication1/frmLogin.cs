@@ -47,7 +47,6 @@ namespace WindowsFormsApplication1
                     byte[] hashBytes = Convert.FromBase64String(savedHashedPass);
                     byte[] salt = new byte[16];
                     Array.Copy(hashBytes, 0, salt, 0, 16);
-                    string password;
                     var pbkdf2 = new Rfc2898DeriveBytes(txt_Password.Text, salt, 10000);
                     byte[] hash = pbkdf2.GetBytes(20);
                     for (int i = 0; i < 20; i++)

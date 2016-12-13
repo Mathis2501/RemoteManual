@@ -11,13 +11,13 @@ using System.Net;
 
 namespace RemoteManual
 {
-    class QR_Scanner
+    public class QR_Scanner
     {
         public string extractedData = "";
         public string Manual;
 
 
-        internal void ScanQRCodeFromFile(string ImgPath)
+        public void ScanQRCodeFromFile(string ImgPath)
         {
             
             

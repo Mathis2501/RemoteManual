@@ -10,15 +10,7 @@ namespace RemoteManual
 
         public string ImgPath;
 
-        QR_Scanner Path = new QR_Scanner();
-
-        public void Run()
-        {
-            Thread threadGetFile = new Thread(GetFile) {ApartmentState = ApartmentState.STA};
-            threadGetFile.Start();
-        }
-
-        internal void GetFile()
+        public void GetFile()
         {
             OpenFileDialog PathFinder = new OpenFileDialog();
             PathFinder.Filter = "All Files (*.*)|*.*";
@@ -32,12 +24,7 @@ namespace RemoteManual
             if (PathFinder.ShowDialog() == DialogResult.OK)
             {
                 ImgPath = PathFinder.FileName;
-                Console.WriteLine(ImgPath);
                 ImgPath = ImgPath.Replace(@"\", "/");
-                Console.WriteLine(ImgPath);
-                Console.ReadLine();
-                Path.ScanQRCodeFromFile(ImgPath);
-
             }
         }
     }
