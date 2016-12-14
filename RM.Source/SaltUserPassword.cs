@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RemoteManual
 {
-    public class CreateUser
+    public class SaltUserPassword
     {
         public string PasswordSaltHash(string password)
         {

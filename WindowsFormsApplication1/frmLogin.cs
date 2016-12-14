@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using RemoteManual;
 
 namespace WindowsFormsApplication1
 {
@@ -18,14 +10,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
-
-        private string cs =
-            @"Data Source=ealdb1.eal.local;Persist Security Info=True;User ID=ejl60_usr;Password=Baz1nga60";
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -36,33 +21,13 @@ namespace WindowsFormsApplication1
             }
             try
             {
-                bool AccessAllowed = false;
-                using (SqlConnection connection = new SqlConnection(cs))
-                {
-                    connection.Open();
-                    SqlCommand cmdpass = new SqlCommand("s",connection);
-                    cmdpass.CommandText = "SELECT Password FROM USER_DATABASE WHERE UserName LIKE '" + txt_UserName.Text + "'";
-                    string savedHashedPass = (string) cmdpass.ExecuteScalar();
-
-                    byte[] hashBytes = Convert.FromBase64String(savedHashedPass);
-                    byte[] salt = new byte[16];
-                    Array.Copy(hashBytes, 0, salt, 0, 16);
-                    var pbkdf2 = new Rfc2898DeriveBytes(txt_Password.Text, salt, 10000);
-                    byte[] hash = pbkdf2.GetBytes(20);
-                    for (int i = 0; i < 20; i++)
-                    {
-                        if (hashBytes[i+16] != hash[i])
-                        {
-                            throw new UnauthorizedAccessException();
-                        }
-                        else
-                        {
-                            AccessAllowed = true;
-                        }
-                    }
-                }
+                CheckPassword CP = new CheckPassword();
+                CP.txt_Password = txt_Password.Text;
+                CP.txt_UserName = txt_UserName.Text;
                 
-                if (AccessAllowed)
+                CP.CheckIfLoginIsAccepted();
+
+                if (CP.AccessAllowed)
                 {
                     MessageBox.Show("Login Successful!");
                     this.Hide();
@@ -78,11 +43,6 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

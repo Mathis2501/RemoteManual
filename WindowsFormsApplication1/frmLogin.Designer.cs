@@ -56,7 +56,6 @@
             this.label1.Size = new System.Drawing.Size(79, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "User Name";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -99,7 +98,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLogin";
             this.Text = "frmLogin";
-            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -68,5 +68,15 @@ namespace WindowsFormsApplication1.Properties {
                 return ResourceManager.GetString("CreateUser_btn_Submit_Click_The_User_Has_Been_Created", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This feature has not been implemented but is intended to show all previously downloaded manuals.
+        /// </summary>
+        internal static string MainUI_button4_Click_This_feature_has_not_been_implemented_but_is_intended_to_show_all_previously_downloaded_manuals {
+            get {
+                return ResourceManager.GetString("MainUI_button4_Click_This_feature_has_not_been_implemented_but_is_intended_to_sho" +
+                        "w_all_previously_downloaded_manuals", resourceCulture);
+            }
+        }
     }
 }

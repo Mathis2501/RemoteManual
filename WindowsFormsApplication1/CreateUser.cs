@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RemoteManual;
 
@@ -25,7 +19,7 @@ namespace WindowsFormsApplication1
 
         private void btn_Submit_Click(object sender, EventArgs e)
         {
-            RemoteManual.CreateUser createUser = new RemoteManual.CreateUser();
+            SaltUserPassword createUser = new SaltUserPassword();
             string hashedPassword = createUser.PasswordSaltHash(txt_Password.Text);
 
             if (txt_UserName.Text == "" || txt_Password.Text == "")
@@ -56,16 +50,6 @@ namespace WindowsFormsApplication1
                 MessageBox.Show(ex.Message);
             }
             
-        }
-
-        private void txt_Password_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CreateUser_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
